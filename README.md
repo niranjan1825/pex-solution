@@ -106,10 +106,10 @@ c) Assume that the API will be running on a small machine with 1 CPU and 512MB o
 * As it can be seen , I have allocated resources(cpu and memory) of 1 and "256Mi" respectively to run application in limited resources enviroment. 
 
 Steps to run program in k8's using docker are as follows assuming you are on root directory of project folder:
-> docker build --tag trial-pex .  (it creates docker image with tag trial-pex which can be seen in docker dashboard)
-> kubectl apply -f deployment.yaml
-> kubectl apply -f service.yaml
-> kubectl port-forward deployment/pex-solution 8443 
+$ docker build --tag trial-pex .  (it creates docker image with tag trial-pex which can be seen in docker dashboard)
+$ kubectl apply -f deployment.yaml
+$ kubectl apply -f service.yaml
+$ kubectl port-forward deployment/pex-solution 8443 
 
 
 
