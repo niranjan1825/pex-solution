@@ -27,9 +27,9 @@ You may use any programming language/framework of your choice.
 Solution:
 
 Implemented fibonacci series using Golang and go-cache(non-persistent). Exposed 3 endpoints 
-1) /current -----> to get current number in series
-2) /next    ------> to get next number in series
-3) /previous ------> to get previous number in series
+* /current -----> to get current number in series
+* /next    ------> to get next number in series
+* /previous ------> to get previous number in series
 
 Handled panics by recovering from panics. Used middleware to handle panics and keep application up and running during panics/crash.Also logging what caused panics.
 
@@ -66,8 +66,8 @@ a) The API must be able to handle high throughput (~1k requests per second).
 Steps to test:(Tested in Macbook)
  
 * First run your application. 
-  a) go build  
-  b) go run main.go
+  > go build  
+  > go run main.go
 
 Open another terminal and follow below steps:
 
