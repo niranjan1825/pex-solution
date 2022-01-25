@@ -37,31 +37,31 @@ Basically at the first , I am inserting 0 in the cache as current value. If some
 
 Use-case:
 
-First 0 is  inserted in cache as  current value
-current--->0
-previous---> "no previous value found since current is 0(first element) in fibonacci series"
-next----->1
-next--->1
-next--->2
-current--->2
-next------>3
-previous---->2
-current----->2
-next---->3
-current--->3
-previous--->2
-previous--->1
-previous--->1
-previous---->0
-current---->0
-previous---->"no previous value found since current is 0(first element) in fibonacci series"
+> First 0 is  inserted in cache as  current value
+> current--->0
+> previous---> "no previous value found since current is 0(first element) in fibonacci series"
+> next----->1
+> next--->1
+> next--->2
+> current--->2
+> next------>3
+> previous---->2
+> current----->2
+> next---->3
+> current--->3
+> previous--->2
+> previous--->1
+> previous--->1
+> previous---->0
+> current---->0
+> previous---->"no previous value found since current is 0(first element) in fibonacci series"
 
 
 Scenarios that were tested:
 
 a) The API must be able to handle high throughput (~1k requests per second).
 
--- Used Vegeta(Vegeta is a versatile HTTP load testing tool built out of a need to drill HTTP services with a constant request rate. It can be used both as a command line utility and a library.)
+> Used Vegeta(Vegeta is a versatile HTTP load testing tool built out of a need to drill HTTP services with a constant request rate. It can be used both as a command line utility and a library.)
 
 Steps to test:(Tested in Macbook)
  
@@ -106,10 +106,10 @@ c) Assume that the API will be running on a small machine with 1 CPU and 512MB o
 * As it can be seen , I have allocated resources(cpu and memory) of 1 and "256Mi" respectively to run application in limited resources enviroment. 
 
 Steps to run program in k8's using docker are as follows assuming you are on root directory of project folder:
-a) docker build --tag trial-pex .  (it creates docker image with tag trial-pex which can be seen in docker dashboard)
-b) kubectl apply -f deployment.yaml
-c) kubectl apply -f service.yaml
-d) kubectl port-forward deployment/pex-solution 8443 
+> docker build --tag trial-pex .  (it creates docker image with tag trial-pex which can be seen in docker dashboard)
+> kubectl apply -f deployment.yaml
+> kubectl apply -f service.yaml
+> kubectl port-forward deployment/pex-solution 8443 
 
 
 
