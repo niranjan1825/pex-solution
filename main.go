@@ -15,7 +15,8 @@ import (
 var c = cache.New(5*time.Minute, 10*time.Minute)
 
 func init() {
-	c.Set("current", 0, cache.DefaultExpiration)
+	var currentValue uint64 = 0
+	c.Set("current", currentValue, cache.DefaultExpiration)
 }
 func main() {
 	router := mux.NewRouter()
@@ -66,18 +67,18 @@ func GetPreviousValue(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if current.(int) == 0 && previous.(int) == 0 {
+	if current.(uint64) == 0 && previous.(uint64) == 0 {
 		log.Println("no previous value since current is 0(first element) in fibonacci series")
 		sendResponse(w, "no previous value found since current is 0(first element) in fibonacci series", http.StatusOK)
 		return
 	}
 	sendResponse(w, previous, http.StatusOK)
 
-	if previous.(int) == 0 {
+	if previous.(uint64) == 0 {
 		current = previous
 		c.Set("current", current, cache.DefaultExpiration)
 	} else {
-		prev := current.(int) - previous.(int)
+		prev := current.(uint64) - previous.(uint64)
 		current, previous = previous, prev
 		c.Set("current", current, cache.DefaultExpiration)
 		c.Set("previous", previous, cache.DefaultExpiration)
@@ -85,11 +86,11 @@ func GetPreviousValue(w http.ResponseWriter, r *http.Request) {
 	}
 
 	val, _ := c.Get("current")
-	fmt.Println("current:", val.(int))
+	fmt.Println("current:", val.(uint64))
 }
 
 func GetNextValue(w http.ResponseWriter, r *http.Request) {
-	var next int
+	var next uint64
 	var previous interface{}
 	current, ok := c.Get("current")
 	if !ok {
@@ -97,9 +98,9 @@ func GetNextValue(w http.ResponseWriter, r *http.Request) {
 		sendResponse(w, "no current value found", http.StatusInternalServerError)
 		return
 	}
-	if current.(int) == 0 {
+	if current.(uint64) == 0 {
 		next = 1
-		current, previous = next, current.(int)
+		current, previous = next, current.(uint64)
 		c.Set("current", current, cache.DefaultExpiration)
 		c.Set("previous", previous, cache.DefaultExpiration)
 	} else {
@@ -109,7 +110,7 @@ func GetNextValue(w http.ResponseWriter, r *http.Request) {
 			sendResponse(w, "no previous value found in cache to calculate next value", http.StatusInternalServerError)
 			return
 		}
-		next = current.(int) + previous.(int)
+		next = current.(uint64) + previous.(uint64)
 		current, previous = next, current
 		c.Set("current", current, cache.DefaultExpiration)
 		c.Set("previous", previous, cache.DefaultExpiration)
