@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"runtime/debug"
@@ -84,9 +83,6 @@ func GetPreviousValue(w http.ResponseWriter, r *http.Request) {
 		c.Set("previous", previous, cache.DefaultExpiration)
 
 	}
-
-	val, _ := c.Get("current")
-	fmt.Println("current:", val.(uint64))
 }
 
 func GetNextValue(w http.ResponseWriter, r *http.Request) {

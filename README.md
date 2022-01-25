@@ -79,7 +79,7 @@ Open another terminal and follow below steps:
 ```
 echo "GET http://localhost:8443/current" | vegeta attack -duration=120s -rate=1000 | tee results.bin | vegeta report
 ```
-This will send 1000 requests/sec to the current endpoint for 120 secs and at the end will produce result as below (extracted for local test) where 120000 requests were sent during that period(1000/sec) and as we can see all transactions passed with 200 status code which concludes application can handle load of 1000 tps
+This will send 1000 requests/sec to the current endpoint for 120 secs and at the end will produce result as below (extracted for local test) where 120000 requests were sent during that period(1000/sec) and as we can see all transactions passed with 200 status code which concludes application can handle load of 1000 tps. Simlarly tested for previous and next endpoint successfully as well.
 
 ```
 Requests      [total, rate, throughput]         120000, 1000.01, 999.99
