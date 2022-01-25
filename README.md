@@ -1,6 +1,6 @@
 # pex-solution
 
-Problem:
+## Problem:
 ```
 Please design and implement a web based API that steps through the Fibonacci sequence.
 
@@ -24,7 +24,7 @@ Assume that the API will be running on a small machine with 1 CPU and 512MB of R
 You may use any programming language/framework of your choice.
 ```
 
-Solution:
+## Solution:
 
 Implemented fibonacci series using Golang and go-cache(non-persistent). Exposed 3 endpoints 
 * /current -----> to get current number in series
@@ -35,7 +35,7 @@ Handled panics by recovering from panics. Used middleware to handle panics and k
 
 Basically at the first , I am inserting 0 in the cache as current value. If someone wants to get previous value when current value is 0 then it will respond with status code 200 and  "no previous value found since current is 0(first element) in fibonacci series".
 
-Use-case:
+# Use-case:
 
 * First 0 is  inserted in cache as  current value
 * current--->0
@@ -57,9 +57,9 @@ Use-case:
 * previous---->"no previous value found since current is 0(first element) in fibonacci series"
 
 
-Scenarios that were tested:
+# Scenarios that were tested:
 
-a) The API must be able to handle high throughput (~1k requests per second).
+**a) The API must be able to handle high throughput (~1k requests per second).**
 
 > Used Vegeta(Vegeta is a versatile HTTP load testing tool built out of a need to drill HTTP services with a constant request rate. It can be used both as a command line utility and a library.)
 
@@ -92,11 +92,11 @@ Status Codes  [code:count]                      200:120000
 Error Set:
 ```
 
-b) The API should also be able to recover and restart if it unexpectedly crashes.
+**b) The API should also be able to recover and restart if it unexpectedly crashes.**
 
 * For this I am using a HandleServerCrash middleware. If any api panics of crashed due to run time error we are catching that runtime exceptions using recover. So any function or api fails it will come out and before reaching main func it will go to middleware where we are recovering from such panic and keeping server/application up and running for further incoming requests. Besides we are printing logs for the stack that it throws when it panics.
 
-c) Assume that the API will be running on a small machine with 1 CPU and 512MB of RAM.
+**c)Assume that the API will be running on a small machine with 1 CPU and 512MB of RAM.**
  
  Pre-Requisites
  -- install docker desktop
@@ -110,6 +110,8 @@ Steps to run program in k8's using docker are as follows assuming you are on roo
 * kubectl apply -f deployment.yaml
 * kubectl apply -f service.yaml
 * kubectl port-forward deployment/pex-solution 8443 
+
+And repeated scenario (a) for testing in enviroment with assigned resources of CPU=1 and Memory=256Mi and it passed.
 
 
 
